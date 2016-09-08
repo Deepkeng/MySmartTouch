@@ -17,9 +17,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        ScriptSet.WXScript("13632316531","9517","56156156");
+
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ScriptSet.WXScript("13632316531","9517","56156156");
+    }
 
     public void startMission(View view) {
         finish();

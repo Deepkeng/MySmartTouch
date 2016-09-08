@@ -7,7 +7,7 @@ import android.os.SystemClock;
  */
 public class ScriptSet {
 
-//使用accessibility 监听点击事件，获取当前窗口的className判断是不是已经点击了按钮。
+//使用accessibility 监听点击事件，获取当前窗口的className判断是不是已经点击了按钮。???指令模拟点击没有日志
     public static void WXScript(String wxnum,String remark,String screenname) {
         // RootShellCmd cmd = new RootShellCmd();
         new RootShellCmd().simulateSwipeLeftRight(100, 600);
@@ -21,8 +21,8 @@ public class ScriptSet {
         new RootShellCmd().simulateKey(26);
         SystemClock.sleep(1000);
         new RootShellCmd().simulateKey(26);
-        SystemClock.sleep(2000);
-        new RootShellCmd().simulateSwipeUpDown(900, 300);
+        SystemClock.sleep(2500);
+        new RootShellCmd().simulateSwipeUpDown(900, 100);
         SystemClock.sleep(2000);
         new RootShellCmd().simulateClick(500, 130);
         SystemClock.sleep(2000);

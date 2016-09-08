@@ -25,7 +25,7 @@ public class RootShellCmd {
     }
 
     public  void simulateSwipeUpDown(int y, int y1) {
-        exec("input swipe 300 " + Integer.toString(y) + " 300 " + Integer.toString(y1) + " 100 " + "\n");
+        exec("input swipe 500 " + Integer.toString(y) + " 500 " + Integer.toString(y1) + " 100 " + "\n");
     }
 
     public  void simulateSwipeLeftRight(int x, int x1) {
