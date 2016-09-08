@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        ScriptSet.WXScript("13632316531","9394944","56156156");
+        ScriptSet.WXScript("13632316531","9517","56156156");
     }
 
 
