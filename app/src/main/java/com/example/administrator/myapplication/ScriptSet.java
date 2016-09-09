@@ -158,7 +158,6 @@ public class ScriptSet {
         SystemClock.sleep(5000);
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
-
         int a = new RootShellCmd().getColors(672,90);   //黑
         int b = new RootShellCmd().getColors(672,98);//白
         int c = new RootShellCmd().getColors(671,105);//黑
