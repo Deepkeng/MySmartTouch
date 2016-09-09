@@ -11,6 +11,10 @@ public class ScriptSet {
 
     //使用accessibility 监听点击事件，获取当前窗口的className判断是不是已经点击了按钮。???指令模拟点击没有日志
     public static void WXAddFriendScript(String wxnum, String remark, String screenname) {
+        SystemClock.sleep(2000);
+        new RootShellCmd().simulateClick(500,130);
+
+
         if (findAddImg(screenname)) {
             if (clickAdd(screenname)) {
                 if (clickAddFriend(screenname)) {
@@ -35,10 +39,10 @@ public class ScriptSet {
                                 Log.d("ScriptSet","修改备注完毕");
                                 SystemClock.sleep(2000);
                                 new RootShellCmd().simulateKey(4);
+                                Log.d("ScriptSet","正在退出");
                                 SystemClock.sleep(1000);
                                 new RootShellCmd().simulateKey(4);
                                 SystemClock.sleep(1000);
-                                Log.d("ScriptSet","正在退出");
                                 new RootShellCmd().simulateKey(4);
                                 SystemClock.sleep(1000);
                                 new RootShellCmd().simulateKey(4);
@@ -56,7 +60,7 @@ public class ScriptSet {
 
 
     private static boolean findAddImg(String screenname) {
-        SystemClock.sleep(4000);
+
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(1000);
         int a = new RootShellCmd().getColors(638, 98);   //判断加号位置 638 98 , 651 83 ,666 98 , 656 93 黑色 r=57  g=58   b=63
