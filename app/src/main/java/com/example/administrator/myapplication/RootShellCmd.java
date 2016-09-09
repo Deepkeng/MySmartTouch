@@ -59,6 +59,7 @@ public class RootShellCmd  {
 
         if (x >= bmp.getWidth() || y >= bmp.getHeight()) {
             Log.d("RootShellCmd", "x, y is out of bounds");
+
             return -1;
         }
 
