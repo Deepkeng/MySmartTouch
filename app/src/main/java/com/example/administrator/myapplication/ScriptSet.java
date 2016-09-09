@@ -14,7 +14,6 @@ public class ScriptSet {
         SystemClock.sleep(2000);
         new RootShellCmd().simulateClick(500,130);
 
-
         if (findAddImg(screenname)) {
             if (clickAdd(screenname)) {
                 if (clickAddFriend(screenname)) {
