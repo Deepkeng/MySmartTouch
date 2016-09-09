@@ -38,6 +38,7 @@ public class ScriptSet {
                                 SystemClock.sleep(1000);
                                 new RootShellCmd().simulateKey(4);
                                 SystemClock.sleep(1000);
+                                Log.d("ScriptSet","正在退出");
                                 new RootShellCmd().simulateKey(4);
                                 SystemClock.sleep(1000);
                                 new RootShellCmd().simulateKey(4);
