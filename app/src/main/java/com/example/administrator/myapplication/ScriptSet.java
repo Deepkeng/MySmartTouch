@@ -63,10 +63,12 @@ public class ScriptSet {
         int c = new RootShellCmd().getColors(666, 98);
         int d = new RootShellCmd().getColors(656, 93);
         if (a == -1 && b == -1 && c == -1 && d == -13026753) {
-            Log.d("ScriptSet", "加号找到");
+            Log.d("ScriptSet", "找到加号");
             return true;                                    //     1280*720 点击+号坐标   r=57  g=58   b=63
         } else {
+            Log.d("ScriptSet", "没找到加号");
             return false;
+
         }
     }
 
@@ -84,6 +86,7 @@ public class ScriptSet {
             Log.d("ScriptSet", "找到了添加朋友按钮");
             return true;
         } else {
+            Log.d("ScriptSet", "没找到添加朋友按钮");
             return false;
         }
     }
@@ -101,6 +104,7 @@ public class ScriptSet {
             Log.d("ScriptSet", "找到了绿色放大镜");
             return true;
         } else {
+            Log.d("ScriptSet", "没找到绿色放大镜");
             return false;
         }
     }
@@ -120,6 +124,7 @@ public class ScriptSet {
             return true;
 
         } else {
+            Log.d("ScriptSet", "没找到EditText");
             return false;
         }
     }
@@ -139,6 +144,7 @@ public class ScriptSet {
             Log.d("ScriptSet", "找到搜索微按钮");
             return true;
         } else {
+            Log.d("ScriptSet", "没找到搜索微按钮");
             return false;
         }
     }
@@ -159,6 +165,7 @@ public class ScriptSet {
             Log.d("ScriptSet", "找到了右上角的三点按钮");
             return true;
         }
+        Log.d("ScriptSet", "没找到右上角的三点按钮");
         return false;
     }
 
