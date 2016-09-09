@@ -60,7 +60,7 @@ public class ScriptSet {
 
 
     private static boolean findAddImg(String screenname) {
-
+        SystemClock.sleep(3000);
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(1000);
         int a = new RootShellCmd().getColors(638, 98);   //判断加号位置 638 98 , 651 83 ,666 98 , 656 93 黑色 r=57  g=58   b=63
