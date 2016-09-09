@@ -19,15 +19,21 @@ public class ScriptSet {
                             if (clicksousuo(screenname)) { //账号为数字，跳详细资料页面。账号为字母+数字跳搜索页面，要再点一层才到详细资料页面。
                                 new RootShellCmd().simulateClick(715, 100);
                                 Log.d("ScriptSet","点击了三点按钮");
+                                SystemClock.sleep(2000);
                                 new RootShellCmd().simulateClick(600,150);
+                                SystemClock.sleep(2000);
                                 Log.d("ScriptSet","点击了备注按钮");
                                 new RootShellCmd().simulateKey(67);
                                 new RootShellCmd().simulateKey(67);
+                                Log.d("ScriptSet","正在修改");
                                 new RootShellCmd().simulateKey(67);
                                 new RootShellCmd().simulateKey(67);
                                 new RootShellCmd().simulateKey(67);
                                 new RootShellCmd().setText(remark);
+                                SystemClock.sleep(2000);
                                 new RootShellCmd().simulateClick(715, 100);
+                                Log.d("ScriptSet","修改备注完毕");
+                                SystemClock.sleep(2000);
                                 new RootShellCmd().simulateKey(4);
                                 SystemClock.sleep(1000);
                                 new RootShellCmd().simulateKey(4);
@@ -142,8 +148,7 @@ public class ScriptSet {
         new RootShellCmd().simulateClick(340, 213);//搜索微信账号按钮
         Log.d("ScriptSet", "点击了搜索微信按钮");
         //判断网络
-        SystemClock.sleep(3000);
-
+        SystemClock.sleep(5000);
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
 
