@@ -1,5 +1,6 @@
 package com.example.administrator.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        //启动服务
+        startService(new Intent(getApplicationContext(),AcceptCommandService.class));
         mEditText1 = (EditText) findViewById(R.id.et_1);
         mEditText2 = (EditText) findViewById(R.id.et_2);
         try {
@@ -54,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 执行脚本
+     * @param weixinnum 要添加的微信账号
+     * @param remarkname 要改成的备注名
+     */
     private void runScript(String weixinnum, String remarkname) {
         boolean isFinish = ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
         if (isFinish) {
@@ -79,11 +87,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //重新执行脚本
     private boolean reRun(String weixinnum, String remarkname) {
         back();
         return ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");
     }
 
+    //回退
     private void back() {
         new RootShellCmd().simulateKey(4);
         SystemClock.sleep(1000);

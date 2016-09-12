@@ -25,35 +25,48 @@ public class RootShellCmd {
         }
     }
 
+    //模拟单击
     public void simulateClick(int x, int y) {
         exec("input tap " + Integer.toString(x) + " " + Integer.toString(y) + "\n");
     }
 
+    //模拟长按
     public void simulateLongClick(int x, int y) {
         exec("input swipe " + Integer.toString(x) + " " + Integer.toString(y) + " " + Integer.toString(x) + " " + Integer.toString(y) + " 1500" + "\n");
-        Log.d("RootShellCmd","执行了长按");
+        Log.d("RootShellCmd", "执行了长按");
     }
 
+    /**
+     * 根据Y坐标模拟上下滑动手势
+     *
+     * @param y  从y滑到y1,或者y1滑到y
+     * @param y1
+     */
     public void simulateSwipeUpDown(int y, int y1) {
         exec("input swipe 500 " + Integer.toString(y) + " 500 " + Integer.toString(y1) + " 100 " + "\n");
     }
 
+    //根据X坐标模拟左右滑动
     public void simulateSwipeLeftRight(int x, int x1) {
         exec("input swipe " + Integer.toString(x) + " 640 " + Integer.toString(x1) + " 640 " + "100 " + "\n");
     }
 
+    //根据keyCode执行相应的操作
     public void simulateKey(int keyCode) {
         exec("input keyevent " + keyCode + "\n");
     }
 
+    //给EditText设置文字
     public void setText(String content) {
         exec("input text " + content + "\n");
     }
 
+    //截屏
     public void getScreen(String screenName) {
         exec("screencap /sdcard/backup/" + screenName + ".png" + "\n");//暂时写死的路径
     }
 
+    //获取图片指定坐标的颜色
     public int getColors(int x, int y, String screenName) {
         String filePath = "/sdcard/backup/" + screenName + ".png";//暂时写死的路径
         Bitmap bmp = BitmapFactory.decodeFile(filePath);

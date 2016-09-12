@@ -9,7 +9,14 @@ import android.util.Log;
 public class ScriptSet {
 
 
-
+    /**
+     * 执行微信添加朋友以及修改备注脚本
+     *
+     * @param wxnum      要添加的账号
+     * @param remark     要修改成的备注名
+     * @param screenname 截图保存的图片名称
+     * @return
+     */
     public static boolean WXAddFriendScript(String wxnum, String remark, String screenname) {
         SystemClock.sleep(2000);
         new RootShellCmd().simulateClick(500, 130);//点击桌面的微信APP
@@ -17,28 +24,37 @@ public class ScriptSet {
         if (findAddImg(screenname)) {
             if (clickAdd(screenname)) {
                 if (clickAddFriend(screenname)) {
-                    if (clicklvsefangdajing(screenname)) {
-                        if (findsousuobut(screenname, wxnum)) {
-                            if (clicksousuo(screenname)) { //账号为数字，跳详细资料页面。账号为字母+数字跳搜索页面，要再点一层才到详细资料页面。
+                    if (clickLvSeFangDaJing(screenname)) {
+                        if (findSearchButtn(screenname, wxnum)) {
+                            if (clickSearch(screenname)) { //账号为数字，跳详细资料页面。账号为字母+数字跳搜索页面，要再点一层才到详细资料页面。
                                 if (clickThreePoint(screenname)) {
                                     if (clickRemarkButton(screenname)) {
                                         if (deleteBeforeAndMark(remark)) {
                                             clickFinishButton();//这里的逻辑没处理
                                             exit();
                                             return true;
-                                        }return false;
-                                    }return false;
-                                }return false;
-                            }return false;
-                        }return false;
-                    }return false;
-                }return false;
-            }return false;
-        }return false;
+                                        }
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                                return false;
+                            }
+                            return false;
+                        }
+                        return false;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
 
     }
 
-
+    //找到微信的+号图标
     private static boolean findAddImg(String screenname) {
         SystemClock.sleep(3000);//等待微信APP启动
         new RootShellCmd().getScreen(screenname);
@@ -57,6 +73,8 @@ public class ScriptSet {
         }
     }
 
+
+    //点击微信右上角的加号按钮
     public static boolean clickAdd(String screenname) {
         new RootShellCmd().simulateClick(715, 100);//找到+号，点击
         Log.d("ScriptSet", "点击了加号");
@@ -76,6 +94,7 @@ public class ScriptSet {
         }
     }
 
+    //点击加号弹出的List的“添加朋友”按钮
     public static boolean clickAddFriend(String screenname) {
         new RootShellCmd().simulateClick(600, 320);//666 310     1280*720 添加朋友坐标  r=57  g=58   b=63
         Log.d("ScriptSet", "点击了添加朋友按钮");
@@ -94,7 +113,8 @@ public class ScriptSet {
         }
     }
 
-    public static boolean clicklvsefangdajing(String screenname) {
+    //点击绿色放大镜区域的EditeText
+    public static boolean clickLvSeFangDaJing(String screenname) {
         new RootShellCmd().simulateClick(240, 240);             // 添加朋友界面，点击放大镜
         Log.d("ScriptSet", "点击了绿色放大镜");
         SystemClock.sleep(2000);
@@ -115,7 +135,7 @@ public class ScriptSet {
     }
 
     //找到输入微信账号后出现的搜索按钮
-    public static boolean findsousuobut(String screenname, String wxnum) {
+    public static boolean findSearchButtn(String screenname, String wxnum) {
         new RootShellCmd().setText(wxnum);
         Log.d("ScriptSet", "输入了微信账号");
         SystemClock.sleep(2000);
@@ -134,8 +154,8 @@ public class ScriptSet {
         }
     }
 
-
-    public static boolean clicksousuo(String screenname) {
+    //输入账号后点击搜索联系人按钮
+    public static boolean clickSearch(String screenname) {
         new RootShellCmd().simulateClick(340, 213);//搜索微信账号按钮
         Log.d("ScriptSet", "点击了搜索微信按钮");
         SystemClock.sleep(5000);//等待搜索
@@ -152,6 +172,7 @@ public class ScriptSet {
         return false;
     }
 
+    //点击微信右上角的三个小点按钮
     public static boolean clickThreePoint(String screenname) {
         new RootShellCmd().simulateClick(715, 100);
         Log.d("ScriptSet", "点击了三点按钮");
@@ -168,6 +189,7 @@ public class ScriptSet {
         return false;
     }
 
+    //点击三个小点弹出的修改备注名按钮
     public static boolean clickRemarkButton(String screenname) {
         new RootShellCmd().simulateClick(600, 150);
         Log.d("ScriptSet", "点击了修改备注按钮");
@@ -184,9 +206,10 @@ public class ScriptSet {
         return false;
     }
 
+    //删除之前的名字，进行写入新的备注名
     public static boolean deleteBeforeAndMark(String remark) {
         Log.d("ScriptSet", "正在修改");
-        for (int i=0;i<30;i++){
+        for (int i = 0; i < 30; i++) {
             SystemClock.sleep(250);
             new RootShellCmd().simulateKey(67);
         }
@@ -196,6 +219,7 @@ public class ScriptSet {
         return true;
     }
 
+    //点击微信右上角的完成按钮
     public static boolean clickFinishButton() {
         new RootShellCmd().simulateClick(715, 100);
         Log.d("ScriptSet", "修改备注已保存");
@@ -203,6 +227,7 @@ public class ScriptSet {
         return true;
     }
 
+    //退出操作
     public static void exit() {
         new RootShellCmd().simulateKey(4);
         Log.d("ScriptSet", "正在退出");
