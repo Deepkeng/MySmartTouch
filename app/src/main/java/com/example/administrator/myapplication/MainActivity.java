@@ -3,6 +3,7 @@ package com.example.administrator.myapplication;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,9 +41,22 @@ public class MainActivity extends AppCompatActivity {
         if(!weixinnum.isEmpty()&&!remarkname.isEmpty()){
             boolean isFinish = ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
             if(!isFinish){
-                if(!reRun(weixinnum, remarkname)){
-                    if(!reRun(weixinnum, remarkname)){
-                        reRun(weixinnum, remarkname);
+                Log.d("ScriptSet", "执行第二遍");
+                boolean a = reRun(weixinnum, remarkname);
+
+                if(!a){
+                    Log.d("ScriptSet", "执行第三遍");
+                    boolean b = reRun(weixinnum, remarkname);
+
+                    if(!b){
+                        Log.d("ScriptSet", "执行第四遍");
+                        boolean c = reRun(weixinnum, remarkname);
+                        if(c){
+                            Log.d("ScriptSet", "执行成功");
+                        }else {
+                            Log.d("ScriptSet", "执行失败");
+                            back();
+                        }
                     }
                 }
             }
@@ -54,14 +68,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean reRun(String weixinnum, String remarkname) {
-        new RootShellCmd().simulateKey(4);
-        SystemClock.sleep(1000);
-        new RootShellCmd().simulateKey(4);
-        SystemClock.sleep(1000);
-        new RootShellCmd().simulateKey(4);
-        SystemClock.sleep(1000);
-        new RootShellCmd().simulateKey(4);
+        back();
         return ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");
+    }
+
+    private void back() {
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
     }
 
     public void startMission(View view) {

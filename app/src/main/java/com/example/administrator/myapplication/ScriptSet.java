@@ -9,10 +9,10 @@ import android.util.Log;
 public class ScriptSet {
 
 
-    //使用accessibility 监听点击事件，获取当前窗口的className判断是不是已经点击了按钮。???指令模拟点击没有日志
+
     public static boolean WXAddFriendScript(String wxnum, String remark, String screenname) {
         SystemClock.sleep(2000);
-        new RootShellCmd().simulateClick(500, 130);
+        new RootShellCmd().simulateClick(500, 130);//点击桌面的微信APP
 
         if (findAddImg(screenname)) {
             if (clickAdd(screenname)) {
@@ -23,7 +23,7 @@ public class ScriptSet {
                                 if (clickThreePoint(screenname)) {
                                     if (clickRemarkButton(screenname)) {
                                         if (deleteBeforeAndMark(remark)) {
-                                            clickFinishButton();
+                                            clickFinishButton();//这里的逻辑没处理
                                             exit();
                                             return true;
                                         }return false;
@@ -40,7 +40,7 @@ public class ScriptSet {
 
 
     private static boolean findAddImg(String screenname) {
-        SystemClock.sleep(3000);
+        SystemClock.sleep(3000);//等待微信APP启动
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(1000);
         int a = new RootShellCmd().getColors(638, 98, screenname);   //判断加号位置 638 98 , 651 83 ,666 98 , 656 93 黑色 r=57  g=58   b=63
@@ -186,10 +186,10 @@ public class ScriptSet {
     }
 
     public static boolean deleteBeforeAndMark(String remark) {
+        Log.d("ScriptSet", "正在修改");
         for (int i=0;i<30;i++){
             SystemClock.sleep(250);
             new RootShellCmd().simulateKey(67);
-            Log.d("ScriptSet", "正在修改");
         }
         SystemClock.sleep(1000);
         new RootShellCmd().setText(remark);
