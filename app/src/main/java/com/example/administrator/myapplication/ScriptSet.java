@@ -10,7 +10,7 @@ public class ScriptSet {
 
 
     //使用accessibility 监听点击事件，获取当前窗口的className判断是不是已经点击了按钮。???指令模拟点击没有日志
-    public static void WXAddFriendScript(String wxnum, String remark, String screenname) {
+    public static boolean WXAddFriendScript(String wxnum, String remark, String screenname) {
         SystemClock.sleep(2000);
         new RootShellCmd().simulateClick(500, 130);
 
@@ -25,15 +25,17 @@ public class ScriptSet {
                                         if (deleteBeforeAndMark(remark)) {
                                             clickFinishButton();
                                             exit();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+                                            return true;
+                                        }return false;
+                                    }return false;
+                                }return false;
+                            }return false;
+                        }return false;
+                    }return false;
+                }return false;
+            }return false;
+        }return false;
+
     }
 
 
@@ -147,7 +149,7 @@ public class ScriptSet {
             Log.d("ScriptSet", "找到了右上角的三点按钮");
             return true;
         }
-        Log.d("ScriptSet", "没找到右上角的三点按钮");
+        Log.d("ScriptSet", "没找到右上角的三点按钮,用户不存在或者网络不好");
         return false;
     }
 
@@ -184,13 +186,11 @@ public class ScriptSet {
     }
 
     public static boolean deleteBeforeAndMark(String remark) {
-        new RootShellCmd().simulateKey(67);
-        new RootShellCmd().simulateKey(67);
-        Log.d("ScriptSet", "正在修改");
-        new RootShellCmd().simulateKey(67);
-        new RootShellCmd().simulateKey(67);
-        new RootShellCmd().simulateKey(67);
-        new RootShellCmd().simulateKey(67);
+        for (int i=0;i<30;i++){
+            SystemClock.sleep(250);
+            new RootShellCmd().simulateKey(67);
+            Log.d("ScriptSet", "正在修改");
+        }
         SystemClock.sleep(1000);
         new RootShellCmd().setText(remark);
         SystemClock.sleep(2000);

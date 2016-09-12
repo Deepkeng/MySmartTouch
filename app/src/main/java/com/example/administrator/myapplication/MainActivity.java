@@ -1,6 +1,7 @@
 package com.example.administrator.myapplication;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -37,12 +38,30 @@ public class MainActivity extends AppCompatActivity {
         String weixinnum = mEditText1.getText().toString().trim();
         String remarkname= mEditText2.getText().toString().trim();
         if(!weixinnum.isEmpty()&&!remarkname.isEmpty()){
-            ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");
+            boolean isFinish = ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
+            if(!isFinish){
+                if(!reRun(weixinnum, remarkname)){
+                    if(!reRun(weixinnum, remarkname)){
+                        reRun(weixinnum, remarkname);
+                    }
+                }
+            }
         }else {
             Toast.makeText(this,"账号或备注名为空",Toast.LENGTH_SHORT).show();
         }
 
 
+    }
+
+    private boolean reRun(String weixinnum, String remarkname) {
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
+        return ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");
     }
 
     public void startMission(View view) {
