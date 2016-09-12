@@ -19,6 +19,22 @@
         android:textColor="@color/colorPrimaryDark"
         android:layout_centerHorizontal="true"/>
 
+    <EditText
+        android:id="@+id/et_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/tv_1"
+        android:hint="请输入要添加的好友账号"
+        />
+
+    <EditText
+        android:id="@+id/et_2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/et_1"
+        android:hint="请输入要改成的备注名"
+        />
+
     <Button
         android:id="@+id/bt_1"
         android:layout_width="wrap_content"
@@ -26,7 +42,7 @@
         android:text="开启任务"
         android:onClick="startMission"
 
-        android:layout_below="@+id/tv_1"
+        android:layout_below="@+id/et_2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"/>
 

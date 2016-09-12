@@ -3,17 +3,26 @@ package com.example.administrator.myapplication;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText mEditText1;
+    private EditText mEditText2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        init();
     }
 
-
+    private void init() {
+        mEditText1 = (EditText) findViewById(R.id.et_1);
+        mEditText2 = (EditText) findViewById(R.id.et_2);
+    }
 
 
     @Override
@@ -25,15 +34,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       ScriptSet.WXAddFriendScript("13632316531","315","9517");
+        String weixinnum = mEditText1.getText().toString().trim();
+        String remarkname= mEditText2.getText().toString().trim();
+        if(!weixinnum.isEmpty()&&!remarkname.isEmpty()){
+            ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");
+        }else {
+            Toast.makeText(this,"账号或备注名为空",Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
     public void startMission(View view) {
         finish();
     }
-
-
 
 
 }
