@@ -10,7 +10,7 @@ import java.io.OutputStream;
 /**
  * Created by psq on 2016/9/7
  */
-public class RootShellCmd  {
+public class RootShellCmd {
     private OutputStream os = null;
 
     public void exec(String cmd) {
@@ -49,9 +49,9 @@ public class RootShellCmd  {
         exec("screencap /sdcard/backup/" + screenName + ".png" + "\n");
     }
 
-    public int getColors(int x,int y,String screenName){
-        String filePath="/sdcard/backup/"+screenName+".png";
-        Bitmap bmp= BitmapFactory.decodeFile(filePath);
+    public int getColors(int x, int y, String screenName) {
+        String filePath = "/sdcard/backup/" + screenName + ".png";
+        Bitmap bmp = BitmapFactory.decodeFile(filePath);
         int color = 0;
         if (bmp == null) {
             return -1;
