@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +26,13 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         mEditText1 = (EditText) findViewById(R.id.et_1);
         mEditText2 = (EditText) findViewById(R.id.et_2);
+        try {
+            Process process = Runtime.getRuntime().exec("su");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
 
     @Override
