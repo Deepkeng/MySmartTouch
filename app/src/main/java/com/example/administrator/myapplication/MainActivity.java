@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SystemClock.sleep(2000);
-        new RootShellCmd().simulateLongClick(500, 130);
         String weixinnum = mEditText1.getText().toString().trim();
         String remarkname = mEditText2.getText().toString().trim();
         if (!weixinnum.isEmpty() && !remarkname.isEmpty()) {
