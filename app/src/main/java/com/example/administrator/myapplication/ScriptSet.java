@@ -63,9 +63,9 @@ public class ScriptSet {
         SystemClock.sleep(2000);
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
-        int a = new RootShellCmd().getColors(318, 164, screenname);   //r=57  g=58   b=63
+        int a = new RootShellCmd().getColors(318, 164, screenname);
         int b = new RootShellCmd().getColors(666, 600, screenname);
-        int c = new RootShellCmd().getColors(622, 190, screenname);
+        int c = new RootShellCmd().getColors(622, 190, screenname); //r=57  g=58   b=63
         int d = new RootShellCmd().getColors(347, 300, screenname);
         if (a == -13026753 && b == -13026753 && c == -13026753 && d == -1) {
             Log.d("ScriptSet", "找到了添加朋友按钮");
@@ -138,8 +138,7 @@ public class ScriptSet {
     public static boolean clicksousuo(String screenname) {
         new RootShellCmd().simulateClick(340, 213);//搜索微信账号按钮
         Log.d("ScriptSet", "点击了搜索微信按钮");
-        //判断网络
-        SystemClock.sleep(5000);
+        SystemClock.sleep(5000);//等待搜索
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
         int a = new RootShellCmd().getColors(672, 90, screenname);   //黑
@@ -149,7 +148,7 @@ public class ScriptSet {
             Log.d("ScriptSet", "找到了右上角的三点按钮");
             return true;
         }
-        Log.d("ScriptSet", "没找到右上角的三点按钮,用户不存在或者网络不好");
+        Log.d("ScriptSet", "没找到右上角的三点按钮,用户不存在或者搜索超时");
         return false;
     }
 

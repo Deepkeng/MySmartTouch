@@ -37,34 +37,39 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         String weixinnum = mEditText1.getText().toString().trim();
-        String remarkname= mEditText2.getText().toString().trim();
-        if(!weixinnum.isEmpty()&&!remarkname.isEmpty()){
-            boolean isFinish = ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
-            if(!isFinish){
-                Log.d("ScriptSet", "执行第二遍");
-                boolean a = reRun(weixinnum, remarkname);
-
-                if(!a){
-                    Log.d("ScriptSet", "执行第三遍");
-                    boolean b = reRun(weixinnum, remarkname);
-
-                    if(!b){
-                        Log.d("ScriptSet", "执行第四遍");
-                        boolean c = reRun(weixinnum, remarkname);
-                        if(c){
-                            Log.d("ScriptSet", "执行成功");
-                        }else {
-                            Log.d("ScriptSet", "执行失败");
-                            back();
-                        }
-                    }
-                }
-            }
-        }else {
-            Toast.makeText(this,"账号或备注名为空",Toast.LENGTH_SHORT).show();
+        String remarkname = mEditText2.getText().toString().trim();
+        if (!weixinnum.isEmpty() && !remarkname.isEmpty()) {
+            runScript(weixinnum, remarkname);
+        } else {
+            Toast.makeText(this, "账号或备注名为空", Toast.LENGTH_SHORT).show();
         }
 
 
+    }
+
+    private void runScript(String weixinnum, String remarkname) {
+        boolean isFinish = ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
+        if (isFinish) {
+            Log.d("ScriptSet", "执行成功");
+        }
+        if (!isFinish) {
+            Log.d("ScriptSet", "修改失败，执行第2遍");
+            boolean a = reRun(weixinnum, remarkname);
+            if (!a) {
+                Log.d("ScriptSet", "修改失败，执行第3遍");
+                boolean b = reRun(weixinnum, remarkname);
+                if (!b) {
+                    Log.d("ScriptSet", "修改失败，执行第4遍");
+                    boolean c = reRun(weixinnum, remarkname);
+                    if (c) {
+                        Log.d("ScriptSet", "执行成功");
+                    } else {
+                        Log.d("ScriptSet", "执行失败，执行结束");
+                        back();
+                    }
+                }
+            }
+        }
     }
 
     private boolean reRun(String weixinnum, String remarkname) {
