@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "账号或备注名为空", Toast.LENGTH_SHORT).show();
         }
 
-
     }
 
     private void runScript(String weixinnum, String remarkname) {

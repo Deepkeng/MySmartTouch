@@ -63,7 +63,6 @@ public class RootShellCmd {
         }
 
         color = bmp.getPixel(x, y);
-
         bmp.recycle();
 
         int r = Color.red(color);
