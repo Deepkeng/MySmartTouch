@@ -29,6 +29,11 @@ public class RootShellCmd {
         exec("input tap " + Integer.toString(x) + " " + Integer.toString(y) + "\n");
     }
 
+    public void simulateLongClick(int x, int y) {
+        exec("input swipe " + Integer.toString(x) + " " + Integer.toString(y) + " " + Integer.toString(x) + " " + Integer.toString(y) + " 1500" + "\n");
+        Log.d("RootShellCmd","执行了长按");
+    }
+
     public void simulateSwipeUpDown(int y, int y1) {
         exec("input swipe 500 " + Integer.toString(y) + " 500 " + Integer.toString(y1) + " 100 " + "\n");
     }
