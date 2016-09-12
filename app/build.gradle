@@ -25,7 +25,7 @@ dependencies {
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-   // compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
    // compile 'org.openpnp:opencv:2.4.13-0'
     //compile 'nu.pattern:opencv:2.4.9-7'
 

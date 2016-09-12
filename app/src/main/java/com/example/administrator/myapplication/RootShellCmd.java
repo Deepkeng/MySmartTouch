@@ -45,12 +45,12 @@ public class RootShellCmd  {
         exec("input text " + content + "\n");
     }
 
-    public void getScreen(String imageName) {
-        exec("screencap /sdcard/backup/" + imageName + ".png" + "\n");
+    public void getScreen(String screenName) {
+        exec("screencap /sdcard/backup/" + screenName + ".png" + "\n");
     }
 
-    public int getColors(int x,int y){
-        String filePath="/sdcard/backup/56156156.png";
+    public int getColors(int x,int y,String screenName){
+        String filePath="/sdcard/backup/"+screenName+".png";
         Bitmap bmp= BitmapFactory.decodeFile(filePath);
         int color = 0;
         if (bmp == null) {

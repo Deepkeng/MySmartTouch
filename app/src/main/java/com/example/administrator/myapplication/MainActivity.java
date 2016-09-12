@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       ScriptSet.WXAddFriendScript("13632316531","9517","56156156");
+       ScriptSet.WXAddFriendScript("13632316531","315","9517");
 
     }
 
