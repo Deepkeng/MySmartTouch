@@ -46,11 +46,11 @@ public class RootShellCmd {
     }
 
     public void getScreen(String screenName) {
-        exec("screencap /sdcard/backup/" + screenName + ".png" + "\n");
+        exec("screencap /sdcard/backup/" + screenName + ".png" + "\n");//暂时写死的路径
     }
 
     public int getColors(int x, int y, String screenName) {
-        String filePath = "/sdcard/backup/" + screenName + ".png";
+        String filePath = "/sdcard/backup/" + screenName + ".png";//暂时写死的路径
         Bitmap bmp = BitmapFactory.decodeFile(filePath);
         int color = 0;
         if (bmp == null) {
