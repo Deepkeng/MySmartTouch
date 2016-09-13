@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.IOException;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
         startService(new Intent(getApplicationContext(),AcceptCommandService.class));
         mEditText1 = (EditText) findViewById(R.id.et_1);
         mEditText2 = (EditText) findViewById(R.id.et_2);
-        try {
+        /*try {
             Process process = Runtime.getRuntime().exec("su");
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 

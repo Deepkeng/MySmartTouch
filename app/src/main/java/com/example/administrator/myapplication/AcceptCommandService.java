@@ -9,6 +9,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * Created by psq on 2016/9/12
  */
@@ -28,6 +30,8 @@ public class AcceptCommandService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+
+
         // 创建接收端的Socket对象
         DatagramSocket ds = null;
         try {
@@ -47,7 +51,12 @@ public class AcceptCommandService extends IntentService {
                 // 解析数据
                 String ip = dp.getAddress().getHostAddress();
                 String s = new String(dp.getData(), 0, dp.getLength());
+
+                int i = parseInt(s);
+
                 Log.d("AcceptCommandService","from " + ip + " data is : " + s);
+               // new RootShellCmd().simulateKey(i);
+              //  new RootShellCmd().simulateSwipe(s);
             }
 
 

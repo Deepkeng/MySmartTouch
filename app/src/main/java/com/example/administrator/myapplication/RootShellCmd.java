@@ -36,12 +36,8 @@ public class RootShellCmd {
         Log.d("RootShellCmd", "执行了长按");
     }
 
-    /**
-     * 根据Y坐标模拟上下滑动手势
-     *
-     * @param y  从y滑到y1,或者y1滑到y
-     * @param y1
-     */
+
+    //根据Y坐标模拟上下滑动手势
     public void simulateSwipeUpDown(int y, int y1) {
         exec("input swipe 500 " + Integer.toString(y) + " 500 " + Integer.toString(y1) + " 100 " + "\n");
     }
@@ -92,6 +88,10 @@ public class RootShellCmd {
 
     }
 
+    //根据X坐标模拟左右滑动
+    public void simulateSwipe(String x) {
+        exec("input swipe " + x + " 200 " + "\n");
+    }
 
 
 
