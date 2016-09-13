@@ -93,7 +93,9 @@ public class RootShellCmd {
         exec("input swipe " + x + " 200 " + "\n");
     }
 
-
+    public void simulateKey(String keyCode) {
+        exec("input keyevent " + keyCode + "\n");
+    }
 
    /* public int getColor(int x, int y) {
         Log.d("RootShellCmd", "method:============getColor");
