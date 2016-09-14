@@ -59,12 +59,12 @@ public class RootShellCmd {
 
     //截屏
     public void getScreen(String screenName) {
-        exec("screencap /sdcard/backup/" + screenName + ".png" + "\n");//暂时写死的路径
+        exec("screencap /sdcard/backups/" + screenName + ".png" + "\n");//暂时写死的路径
     }
 
     //获取图片指定坐标的颜色
     public int getColors(int x, int y, String screenName) {
-        String filePath = "/sdcard/backup/" + screenName + ".png";//暂时写死的路径
+        String filePath = "/sdcard/backups/" + screenName + ".png";//暂时写死的路径
         Bitmap bmp = BitmapFactory.decodeFile(filePath);
         int color = 0;
         if (bmp == null) {

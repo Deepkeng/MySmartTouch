@@ -2,12 +2,9 @@ package com.example.administrator.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,16 +21,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         //启动服务
-        startService(new Intent(getApplicationContext(),AcceptCommandService.class));
-        mEditText1 = (EditText) findViewById(R.id.et_1);
-        mEditText2 = (EditText) findViewById(R.id.et_2);
+        startService(new Intent(getApplicationContext(), AcceptCommandService.class));
+       /* mEditText1 = (EditText) findViewById(R.id.et_1);
+        mEditText2 = (EditText) findViewById(R.id.et_2);*/
         /*try {
             Process process = Runtime.getRuntime().exec("su");
         } catch (IOException e) {
             e.printStackTrace();
         }*/
     }
-
 
 
     @Override
@@ -45,62 +41,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        String weixinnum = mEditText1.getText().toString().trim();
-        String remarkname = mEditText2.getText().toString().trim();
-        if (!weixinnum.isEmpty() && !remarkname.isEmpty()) {
-            runScript(weixinnum, remarkname);
-        } else {
-            Toast.makeText(this, "账号或备注名为空", Toast.LENGTH_SHORT).show();
-        }
+       /* String weixinnum = mEditText1.getText().toString().trim();
+        String remarkname = mEditText2.getText().toString().trim();*/
+        // if (!weixinnum.isEmpty() && !remarkname.isEmpty()) {
+       // runScript("13632316531", "119");
+        //  } else {
+        //      Toast.makeText(this, "账号或备注名为空", Toast.LENGTH_SHORT).show();
+        // }
 
     }
 
-    /**
-     * 执行脚本
-     * @param weixinnum 要添加的微信账号
-     * @param remarkname 要改成的备注名
-     */
-    private void runScript(String weixinnum, String remarkname) {
-        boolean isFinish = ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
-        if (isFinish) {
-            Log.d("ScriptSet", "执行成功");
-        }
-        if (!isFinish) {
-            Log.d("ScriptSet", "修改失败，执行第2遍");
-            boolean a = reRun(weixinnum, remarkname);
-            if (!a) {
-                Log.d("ScriptSet", "修改失败，执行第3遍");
-                boolean b = reRun(weixinnum, remarkname);
-                if (!b) {
-                    Log.d("ScriptSet", "修改失败，执行第4遍");
-                    boolean c = reRun(weixinnum, remarkname);
-                    if (c) {
-                        Log.d("ScriptSet", "执行成功");
-                    } else {
-                        Log.d("ScriptSet", "执行失败，执行结束");
-                        back();
-                    }
-                }
-            }
-        }
-    }
 
-    //重新执行脚本
-    private boolean reRun(String weixinnum, String remarkname) {
-        back();
-        return ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");
-    }
 
-    //回退
-    private void back() {
-        new RootShellCmd().simulateKey(4);
-        SystemClock.sleep(1000);
-        new RootShellCmd().simulateKey(4);
-        SystemClock.sleep(1000);
-        new RootShellCmd().simulateKey(4);
-        SystemClock.sleep(1000);
-        new RootShellCmd().simulateKey(4);
-    }
 
     public void startMission(View view) {
         finish();
