@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.util.Log;
 
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -56,9 +54,11 @@ public class AcceptCommandService extends IntentService {
                 Log.d("AcceptCommandService", "from " + ip + " data is : " + s);
                 // new RootShellCmd().simulateKey(i);
                 //new RootShellCmd().simulateSwipe(s);
-                JSONObject json = new JSONObject();
+                //JSONObject json = new JSONObject();
+                ScriptSet.WXAddFriendScript(s,s,s);
 
-                runScript(s, "119");
+
+;
             }
 
 

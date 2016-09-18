@@ -19,7 +19,7 @@ public class ScriptSet {
      * @return
      */
     public static boolean WXAddFriendScript(String wxnum, String remark, String screenname) {
-        SystemClock.sleep(2000);
+    /*    SystemClock.sleep(2000);
         new RootShellCmd().simulateClick(500, 130);//点击桌面的微信APP
 
         if (findAddImg(screenname)) {
@@ -32,6 +32,40 @@ public class ScriptSet {
                                     if (clickRemarkButton(screenname)) {
                                         if (deleteBeforeAndMark(remark)) {
                                             clickFinishButton();//这里的逻辑没处理
+                                            exit();
+                                            return true;
+                                        }
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                                return false;
+                            }
+                            return false;
+                        }
+                        return false;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;*/
+
+        SystemClock.sleep(2000);
+        //new RootShellCmd().simulateClick(500, 130);//点击桌面的微信APP
+
+        if (findAddImg1080(screenname)) {
+            if (clickAdd1080(screenname)) {
+                if (clickAddFriend1080(screenname)) {
+                    if (clickLvSeFangDaJing1080(screenname)) {
+                        if (findSearchButtn1080(screenname, wxnum)) {
+                            if (clickSearch1080(screenname)) { //账号为数字，跳详细资料页面。账号为字母+数字跳搜索页面，要再点一层才到详细资料页面。
+                                if (clickThreePoint1080(screenname)) {
+                                    if (clickRemarkButton1080(screenname)) {
+                                        if (deleteBeforeAndMark1080(remark)) {
+                                            clickFinishButton1080();//这里的逻辑没处理
                                             exit();
                                             return true;
                                         }
@@ -197,7 +231,7 @@ public class ScriptSet {
         SystemClock.sleep(2000);
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
-        int a = new RootShellCmd().getColors(131, 86, screenname);   //白
+        int a = new RootShellCmd().getColors(131, 86, screenname); //白
         int b = new RootShellCmd().getColors(179, 83, screenname);//白
         int c = new RootShellCmd().getColors(213, 106, screenname);//黑
         if (a == -1 && b == -1 && c == -13026753) {
@@ -241,6 +275,179 @@ public class ScriptSet {
         SystemClock.sleep(1000);
         new RootShellCmd().simulateKey(4);
 
+    }
+
+    //====================================================1920*1080分辨率===============================================================================
+    //找到微信的+号图标
+    public static boolean findAddImg1080(String screenname) {
+        SystemClock.sleep(3000);//等待微信APP启动
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(1000);
+        int a = new RootShellCmd().getColors(964,121, screenname);
+        int b = new RootShellCmd().getColors(986,98, screenname);
+        int c = new RootShellCmd().getColors(1006,121, screenname);
+        int d = new RootShellCmd().getColors(975,108, screenname);
+        if (a == -1 && b == -1 && c == -1 && d == -13026753) {
+            Log.d(TAG, "找到加号");
+            return true;
+        } else {
+            Log.d(TAG, "没找到加号");
+            return false;
+
+        }
+    }
+
+    //点击微信右上角的加号按钮
+    public static boolean clickAdd1080(String screenname) {
+        new RootShellCmd().simulateClick(1006,121);//找到+号，点击
+        Log.d(TAG, "点击了加号");
+        SystemClock.sleep(2000);
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        int a = new RootShellCmd().getColors(587,382, screenname);
+        int b = new RootShellCmd().getColors(597,372, screenname);
+        int c = new RootShellCmd().getColors(607,382, screenname);
+        int d = new RootShellCmd().getColors(589,374, screenname);
+        if (a == -1 && b == -1 && c == -1 && d == -13026753) {
+            Log.d(TAG, "找到了添加朋友按钮");
+            return true;
+        } else {
+            Log.d(TAG, "没找到添加朋友按钮");
+            return false;
+        }
+    }
+
+    //点击加号弹出的List的“添加朋友”按钮
+    public static boolean clickAddFriend1080(String screenname) {
+        new RootShellCmd().simulateClick(607,382);
+        Log.d(TAG, "点击了添加朋友按钮");
+        SystemClock.sleep(2000);
+        new RootShellCmd().getScreen(screenname);  //点了添加朋友截图（绿色放大镜界面）
+        SystemClock.sleep(2000);
+        int a = new RootShellCmd().getColors(62,304, screenname);   //63 184 56 绿
+        int b = new RootShellCmd().getColors(112,340, screenname);   //绿
+        int c = new RootShellCmd().getColors(98,325, screenname);   //绿
+        if (a == -12601288 && b == -12601288 && c == -12601288) {
+            Log.d(TAG, "找到了绿色放大镜");
+            return true;
+        } else {
+            Log.d(TAG, "没找到绿色放大镜");
+            return false;
+        }
+    }
+
+    //点击绿色放大镜区域的EditeText
+    public static boolean clickLvSeFangDaJing1080(String screenname) {
+        new RootShellCmd().simulateClick(260, 325);             // 添加朋友界面，点击放大镜
+        Log.d(TAG, "点击了绿色放大镜");
+        SystemClock.sleep(2000);
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        //白色放大镜
+        int a = new RootShellCmd().getColors(185,103, screenname);   //白
+        int b = new RootShellCmd().getColors(224,139, screenname);//白
+        int c = new RootShellCmd().getColors(199,115, screenname);//黑
+        if (a == -1 && b == -1 && c == -13026753) {
+            Log.d(TAG, "找到了输入微信账号EditText");
+            return true;
+
+        } else {
+            Log.d(TAG, "没找到EditText");
+            return false;
+        }
+    }
+
+    //找到输入微信账号后出现的搜索按钮
+    public static boolean findSearchButtn1080(String screenname, String wxnum) {
+        new RootShellCmd().setText(wxnum);
+        Log.d(TAG, "输入了微信账号");
+        SystemClock.sleep(2000);
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        //搜索微信账号，绿框包白色放大镜
+        int a = new RootShellCmd().getColors(43,215, screenname);   //深绿  43 162 69
+        int b = new RootShellCmd().getColors(159,330, screenname);//深绿
+        int c = new RootShellCmd().getColors(112,284, screenname);//白
+        if (a == -13917627 && b == -13917627 && c == -1) {
+            Log.d(TAG, "找到搜索微按钮");
+            return true;
+        } else {
+            Log.d(TAG, "没找到搜索微按钮");
+            return false;
+        }
+    }
+
+    //输入账号后点击搜索联系人按钮
+    public static boolean clickSearch1080(String screenname) {
+        new RootShellCmd().simulateClick(350, 300);//搜索微信账号按钮
+        Log.d(TAG, "点击了搜索微信按钮");
+        SystemClock.sleep(5000);//等待搜索
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        int a = new RootShellCmd().getColors(1014,112, screenname);   //黑
+        int b = new RootShellCmd().getColors(1014,121, screenname);//白
+        int c = new RootShellCmd().getColors(1014,132, screenname);//黑
+        if (a == -13026753 && b == -1 && c == -13026753) {
+            Log.d(TAG, "找到了右上角的三点按钮");
+            return true;
+        }
+        Log.d(TAG, "没找到右上角的三点按钮,用户不存在或者搜索超时");
+        return false;
+    }
+
+    //点击微信右上角的三个小点按钮
+    public static boolean clickThreePoint1080(String screenname) {
+        new RootShellCmd().simulateClick(1006,121);
+        Log.d(TAG, "点击了三点按钮");
+        SystemClock.sleep(2000);
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        int a = new RootShellCmd().getColors(595,229, screenname);   //白
+        int b = new RootShellCmd().getColors(556,268, screenname);//白
+        int c = new RootShellCmd().getColors(565,271, screenname);//黑
+        if (a == -1 && b == -1 && c == -13026753) {
+            Log.d(TAG, "找到了修改备注按钮");
+            return true;
+        }
+        return false;
+    }
+
+    //点击三个小点弹出的修改备注名按钮
+    public static boolean clickRemarkButton1080(String screenname) {
+        new RootShellCmd().simulateClick(756, 250);
+        Log.d(TAG, "点击了修改备注按钮");
+        SystemClock.sleep(2000);
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        int a = new RootShellCmd().getColors(181,103, screenname);   //白
+        int b = new RootShellCmd().getColors(207,141, screenname);//白
+        int c = new RootShellCmd().getColors(192,107, screenname);//黑
+        if (a == -1 && b == -1 && c == -13026753) {
+            Log.d(TAG, "找到了修改备注界面");
+            return true;
+        }
+        return false;
+    }
+
+    //删除之前的名字，进行写入新的备注名
+    public static boolean deleteBeforeAndMark1080(String remark) {
+        Log.d(TAG, "正在修改");
+        for (int i = 0; i < 30; i++) {
+            SystemClock.sleep(250);
+            new RootShellCmd().simulateKey(67);
+        }
+        SystemClock.sleep(1000);
+        new RootShellCmd().setText(remark);
+        SystemClock.sleep(2000);
+        return true;
+    }
+
+    //点击微信右上角的完成按钮
+    public static boolean clickFinishButton1080() {
+        new RootShellCmd().simulateClick(1006,121);
+        Log.d(TAG, "修改备注已保存");
+        SystemClock.sleep(2000);
+        return true;
     }
 }
 
