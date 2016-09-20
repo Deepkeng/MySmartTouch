@@ -24,18 +24,17 @@ public class ScriptSet {
                     if (clickGreenMagnifier10805(screenname)) {
                         if (findSearchButtn10805(weixinaccount, screenname)) {
                             if (clickSearch10805(screenname)) {
-                                needValidation10805(screenname);
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
-
-        return false;
-
-
+                               if(needValidation10805(screenname)) {
+                                   SystemClock.sleep(3000);
+                                   exit();
+                                   return true;
+                               }return false;
+                            }return false;
+                        }return false;
+                    }return false;
+                }return false;
+            }return false;
+        }return false;
     }
 
 
@@ -176,7 +175,11 @@ public class ScriptSet {
                 Log.d(TAG, "点击了添加好友的按钮，详细页面没有个签名和地区");
           return true;
         }
-        Log.d(TAG, "没找添加好友的按钮、用户不存在、好友已添加或者搜索超时");
+        Log.d(TAG, "没找到添加好友的按钮，原因：用户不存在、好友已添加或者搜索超时");
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
         return false;
     }
 
@@ -193,10 +196,10 @@ public class ScriptSet {
         if (a == -15028967 && b == -15028967 && c == -15028967 && d == -15028967) {
             Log.d(TAG, "需要验证");
             new RootShellCmd().simulateClick(889,160);//点击发送按钮
-            Log.d(TAG, "点击了发送按钮");
+            Log.d(TAG, "点击了发送按钮，添加好友任务完成");
             return true;
         }
-        Log.d(TAG, "不需要验证");
+        Log.d(TAG, "不需要验证，添加好友任务完成");
         return false;
 
     }

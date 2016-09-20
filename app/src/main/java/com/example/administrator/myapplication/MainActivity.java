@@ -2,7 +2,9 @@ package com.example.administrator.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -50,15 +52,61 @@ public class MainActivity extends AppCompatActivity {
         //      Toast.makeText(this, "账号或备注名为空", Toast.LENGTH_SHORT).show();
         // }
 
-        ScriptSet.addWeiXinFriendScript("13632316537","9518");
+       runScript("abc123");
 
     }
 
 
-
-
     public void startMission(View view) {
         finish();
+    }
+
+
+    /**
+     * 执行脚本
+     *
+     * @param weixinnum  要添加的微信账号
+     *
+     */
+    private void runScript(String weixinnum) {
+        boolean isFinish = ScriptSet.addWeiXinFriendScript(weixinnum, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
+        if (isFinish) {
+            Log.d("ScriptSet", "执行成功");
+        }
+        if (!isFinish) {
+            Log.d("ScriptSet", "修改失败，执行第2遍");
+            boolean a = reRun(weixinnum);
+            if (!a) {
+                Log.d("ScriptSet", "修改失败，执行第3遍");
+                boolean b = reRun(weixinnum);
+                if (!b) {
+                    Log.d("ScriptSet", "修改失败，执行第4遍");
+                    boolean c = reRun(weixinnum);
+                    if (c) {
+                        Log.d("ScriptSet", "执行成功");
+                    } else {
+                        Log.d("ScriptSet", "执行失败，执行结束");
+                        back();
+                    }
+                }
+            }
+        }
+    }
+
+    //重新执行脚本
+    private boolean reRun(String weixinnum) {
+        return ScriptSet.addWeiXinFriendScript(weixinnum, "9517");
+    }
+
+    //回退
+    private void back() {
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
     }
 
 
