@@ -32,19 +32,22 @@ public class RootShellCmd {
 
     //模拟长按
     public void simulateLongClick(int x, int y) {
-        exec("input swipe " + Integer.toString(x) + " " + Integer.toString(y) + " " + Integer.toString(x) + " " + Integer.toString(y) + " 1500" + "\n");
+        exec("input swipe " + Integer.toString(x) + " " + Integer.toString(y) + " "
+                + Integer.toString(x) + " " + Integer.toString(y) + " 1500" + "\n");
         Log.d("RootShellCmd", "执行了长按");
     }
 
 
     //根据Y坐标模拟上下滑动手势
     public void simulateSwipeUpDown(int y, int y1) {
-        exec("input swipe 500 " + Integer.toString(y) + " 500 " + Integer.toString(y1) + " 100 " + "\n");
+        exec("input swipe 500 " + Integer.toString(y) + " 500 " + Integer.toString(y1)
+                + " 100 " + "\n");
     }
 
     //根据X坐标模拟左右滑动
     public void simulateSwipeLeftRight(int x, int x1) {
-        exec("input swipe " + Integer.toString(x) + " 640 " + Integer.toString(x1) + " 640 " + "100 " + "\n");
+        exec("input swipe " + Integer.toString(x) + " 640 " + Integer.toString(x1) +
+                " 640 " + "100 " + "\n");
     }
 
     //根据keyCode执行相应的操作

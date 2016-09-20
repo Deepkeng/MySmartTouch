@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         //  } else {
         //      Toast.makeText(this, "账号或备注名为空", Toast.LENGTH_SHORT).show();
         // }
-        runAddFriendScript("abc1234");
+        runAddFriendScript("abcd1234");
 
     }
 
