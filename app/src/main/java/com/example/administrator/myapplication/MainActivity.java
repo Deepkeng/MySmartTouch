@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
@@ -23,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
         try {
             String account = FileUtil.readFromAssets(this, "account.txt");
             JSONObject accountJson = new JSONObject(account);
-
-
+            JSONArray jsonArray = accountJson.getJSONArray("weixinaccount");
+            for(int i=0;i<jsonArray.length();i++){
+                Log.d("Main",jsonArray.get(i).toString());
+            }
 
 
         } catch (Exception e) {
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     private void runAddFriendScript(String weixinnum) {
         //只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
         boolean isFinish = ScriptSet.addWeiXinFriendScript(weixinnum, "9517");
-            if (isFinish) {
+        if (isFinish) {
             Log.d("ScriptSet", "执行成功");
         }
         if (!isFinish) {
