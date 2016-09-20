@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         //      Toast.makeText(this, "账号或备注名为空", Toast.LENGTH_SHORT).show();
         // }
 
-        ScriptSet.addWeiXinFriendScript("13632316531","9518");
+        ScriptSet.addWeiXinFriendScript("13632316537","9518");
 
     }
 

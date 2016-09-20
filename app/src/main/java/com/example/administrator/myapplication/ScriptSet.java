@@ -24,7 +24,7 @@ public class ScriptSet {
                     if (clickGreenMagnifier10805(screenname)) {
                         if (findSearchButtn10805(weixinaccount, screenname)) {
                             if (clickSearch10805(screenname)) {
-
+                                needValidation10805(screenname);
                             }
                         }
                     }
@@ -154,38 +154,58 @@ public class ScriptSet {
         SystemClock.sleep(5000);//等待搜索
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
+        //  详细页面有个性签名和地区
         int a = new RootShellCmd().getColors(115, 1218, screenname);     //绿
-        int b = new RootShellCmd().getColors(115, 1060, screenname);    //绿
-        int c = new RootShellCmd().getColors(988, 1218, screenname);    //绿
+        int b = new RootShellCmd().getColors(988, 1218, screenname);    //绿
+        //详细页面没有个性签名有地区
+        int c = new RootShellCmd().getColors(115, 1060, screenname);   //绿
         int d = new RootShellCmd().getColors(988, 1060, screenname);    //绿
-       if (a == -15028967 && b == -15028967 && c == -15028967 && d == -15028967) {
+        //详细页面没有个签名和地区
+        int e = new RootShellCmd().getColors(115, 861, screenname);    //绿
+        int f = new RootShellCmd().getColors(988, 861, screenname);    //绿
+
+        if (a == -15028967 && b == -15028967 || c == -15028967 && d == -15028967 || e == -15028967 && f == -15028967) {
             Log.d(TAG, "找到了添加好友的按钮");
-           return true;
-       }
-        Log.d(TAG, "没找添加好友的按钮,用户不存在或者搜索超时");
+            if (a == -15028967 && b == -15028967) {
+                new RootShellCmd().simulateClick(500, 1218);//点击添加到通讯录按钮
+                Log.d(TAG, "点击了添加好友的按钮，详细页面有个性签名和地区");
+            } else if (c == -15028967 && d == -15028967) {
+                new RootShellCmd().simulateClick(500, 1060);//点击添加到通讯录按钮
+                Log.d(TAG, "点击了添加好友的按钮，详细页面没有个性签名有地区");
+            } else new RootShellCmd().simulateClick(500, 861);//点击添加到通讯录按钮
+                Log.d(TAG, "点击了添加好友的按钮，详细页面没有个签名和地区");
+          return true;
+        }
+        Log.d(TAG, "没找添加好友的按钮、用户不存在、好友已添加或者搜索超时");
         return false;
     }
 
-    //点击添加到通讯录按钮
-    public static boolean clickAddFrinedFinish10805(String screenname) {
-        new RootShellCmd().simulateClick(450, 300);//搜索微信账号按钮
-        Log.d(TAG, "点击了搜索微信按钮");
-        SystemClock.sleep(5000);//等待搜索
+    //判断是否需要验证申请
+    public static boolean needValidation10805(String screenname) {
+        SystemClock.sleep(2000);
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
-        int a = new RootShellCmd().getColors(1008, 109, screenname);    //白
-        int b = new RootShellCmd().getColors(1008, 132, screenname);    //白
-        int c = new RootShellCmd().getColors(1007, 154, screenname);    //白
-        int d = new RootShellCmd().getColors(1008, 144, screenname);    //黑
-        if (a == -1 && b == -1 && c == -1 && d == -13026753) {
-            Log.d(TAG, "添加好友完成");
+        //右上角“发送”按钮
+        int a = new RootShellCmd().getColors(894,104, screenname);    //绿
+        int b = new RootShellCmd().getColors(1040,100, screenname);    //绿
+        int c = new RootShellCmd().getColors(889,160, screenname);    //绿
+        int d = new RootShellCmd().getColors(1041,162, screenname);    //绿
+        if (a == -15028967 && b == -15028967 && c == -15028967 && d == -15028967) {
+            Log.d(TAG, "需要验证");
+            new RootShellCmd().simulateClick(889,160);//点击发送按钮
+            Log.d(TAG, "点击了发送按钮");
             return true;
         }
-        Log.d(TAG, "没点到添加到通讯录按钮");
+        Log.d(TAG, "不需要验证");
         return false;
 
     }
 
+   /* //右上角的三点图片
+    int a = new RootShellCmd().getColors(1008, 109, screenname);    //白
+    int b = new RootShellCmd().getColors(1008, 132, screenname);    //白
+    int c = new RootShellCmd().getColors(1007, 154, screenname);    //白
+    int d = new RootShellCmd().getColors(1008, 144, screenname);    //黑*/
 
     //==============================================1280*720==5.0寸=================================
     //找到微信的+号图标
