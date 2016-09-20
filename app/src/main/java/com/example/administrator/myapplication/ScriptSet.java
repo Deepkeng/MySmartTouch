@@ -204,13 +204,24 @@ public class ScriptSet {
 
     }
 
+    //退出操作
+    public static void exit() {
+        new RootShellCmd().simulateKey(4);
+        Log.d(TAG, "正在退出");
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
+        SystemClock.sleep(1000);
+        new RootShellCmd().simulateKey(4);
+    }
+}
+
    /* //右上角的三点图片
     int a = new RootShellCmd().getColors(1008, 109, screenname);    //白
     int b = new RootShellCmd().getColors(1008, 132, screenname);    //白
     int c = new RootShellCmd().getColors(1007, 154, screenname);    //白
     int d = new RootShellCmd().getColors(1008, 144, screenname);    //黑*/
 
-    //==============================================1280*720==5.0寸=================================
+  /*  //==============================================1280*720==5.0寸=================================
     //找到微信的+号图标
     private static boolean findAddImg(String screenname) {
         SystemClock.sleep(3000);//等待微信APP启动
@@ -567,9 +578,9 @@ public class ScriptSet {
         SystemClock.sleep(2000);
         return true;
     }
+*/
 
 
-}
 
 
 
