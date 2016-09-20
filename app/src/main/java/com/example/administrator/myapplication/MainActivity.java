@@ -47,12 +47,11 @@ public class MainActivity extends AppCompatActivity {
         String remarkname = mEditText2.getText().toString().trim();*/
 
         // if (!weixinnum.isEmpty() && !remarkname.isEmpty()) {
-       // runScript("13632316531", "119");
+        // runScript("13632316531", "119");
         //  } else {
         //      Toast.makeText(this, "账号或备注名为空", Toast.LENGTH_SHORT).show();
         // }
-
-       runScript("abc123");
+        runAddFriendScript("abc1234");
 
     }
 
@@ -65,10 +64,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 执行脚本
      *
-     * @param weixinnum  要添加的微信账号
-     *
+     * @param weixinnum 要添加的微信账号
      */
-    private void runScript(String weixinnum) {
+    private void runAddFriendScript(String weixinnum) {
         boolean isFinish = ScriptSet.addWeiXinFriendScript(weixinnum, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
         if (isFinish) {
             Log.d("ScriptSet", "执行成功");

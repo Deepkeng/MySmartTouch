@@ -392,11 +392,6 @@ public class ScriptSet {
         new RootShellCmd().simulateKey(4);
         SystemClock.sleep(1000);
         new RootShellCmd().simulateKey(4);
-        SystemClock.sleep(1000);
-        new RootShellCmd().simulateKey(4);
-        SystemClock.sleep(1000);
-        new RootShellCmd().simulateKey(4);
-
     }
 
 
