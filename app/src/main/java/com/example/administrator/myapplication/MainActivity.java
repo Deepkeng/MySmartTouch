@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import org.json.JSONObject;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +20,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            String account = FileUtil.readFromAssets(this, "account.txt");
+            JSONObject accountJson = new JSONObject(account);
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         init();
     }
 

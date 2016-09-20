@@ -1,0 +1,13 @@
+{
+    "weixinaccount": [
+        { 
+            "number": "abcd12345"
+        },
+        {
+             "number": "abcd123456"
+        },
+        {
+           "number": "abcd1234567"
+        }
+    ]
+}
