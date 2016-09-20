@@ -55,7 +55,7 @@ public class AcceptCommandService extends IntentService {
                 // new RootShellCmd().simulateKey(i);
                 //new RootShellCmd().simulateSwipe(s);
                 //JSONObject json = new JSONObject();
-                ScriptSet.WXAddFriendScript(s,s,s);
+
 
 
 ;
@@ -79,7 +79,7 @@ public class AcceptCommandService extends IntentService {
      * @param remarkname 要改成的备注名
      */
     private void runScript(String weixinnum, String remarkname) {
-        boolean isFinish = ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
+        boolean isFinish = ScriptSet.addWeiXinFriendScript(weixinnum, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
         if (isFinish) {
             Log.d("ScriptSet", "执行成功");
         }
@@ -106,7 +106,7 @@ public class AcceptCommandService extends IntentService {
     //重新执行脚本
     private boolean reRun(String weixinnum, String remarkname) {
         back();
-        return ScriptSet.WXAddFriendScript(weixinnum, remarkname, "9517");
+        return ScriptSet.addWeiXinFriendScript(weixinnum, "9517");
     }
 
     //回退

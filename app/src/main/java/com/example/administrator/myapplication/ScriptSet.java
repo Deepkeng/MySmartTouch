@@ -11,84 +11,183 @@ public class ScriptSet {
 
 
     /**
-     * 执行微信添加朋友以及修改备注脚本
+     * 执行微信添加朋友备注脚本
      *
-     * @param wxnum      要添加的账号
-     * @param remark     要修改成的备注名
-     * @param screenname 截图保存的图片名称
-     * @return
+     * @param weixinaccount 要添加的账号
+     * @param screenname    截图保存的图片名称
+     * @return 是否添加成功
      */
-    public static boolean WXAddFriendScript(String wxnum, String remark, String screenname) {
-    /*    SystemClock.sleep(2000);
-        new RootShellCmd().simulateClick(500, 130);//点击桌面的微信APP
+    public static boolean addWeiXinFriendScript(String weixinaccount, String screenname) {
+        if (findAddImg10805(screenname)) {
+            if (clickAdd10805(screenname)) {
+                if (clickAddFriend10805(screenname)) {
+                    if (clickGreenMagnifier10805(screenname)) {
+                        if (findSearchButtn10805(weixinaccount, screenname)) {
+                            if (clickSearch10805(screenname)) {
 
-        if (findAddImg(screenname)) {
-            if (clickAdd(screenname)) {
-                if (clickAddFriend(screenname)) {
-                    if (clickLvSeFangDaJing(screenname)) {
-                        if (findSearchButtn(screenname, wxnum)) {
-                            if (clickSearch(screenname)) { //账号为数字，跳详细资料页面。账号为字母+数字跳搜索页面，要再点一层才到详细资料页面。
-                                if (clickThreePoint(screenname)) {
-                                    if (clickRemarkButton(screenname)) {
-                                        if (deleteBeforeAndMark(remark)) {
-                                            clickFinishButton();//这里的逻辑没处理
-                                            exit();
-                                            return true;
-                                        }
-                                        return false;
-                                    }
-                                    return false;
-                                }
-                                return false;
                             }
-                            return false;
                         }
-                        return false;
                     }
-                    return false;
-                }
-                return false;
-            }
-            return false;
-        }
-        return false;*/
 
+                }
+            }
+        }
+
+        return false;
+
+
+    }
+
+
+    //==============================================1920*1080==5.0寸================================
+    //找到微信的+号图标
+    private static boolean findAddImg10805(String screenname) {
+        SystemClock.sleep(3000);//等待微信APP启动
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(1000);
+        //获取加号矩形坐标
+        int a = new RootShellCmd().getColors(956, 132, screenname);
+        int b = new RootShellCmd().getColors(977, 108, screenname);
+        int c = new RootShellCmd().getColors(1002, 132, screenname);
+        int d = new RootShellCmd().getColors(971, 125, screenname);//黑色 r=57  g=58   b=63
+        if (a == -1 && b == -1 && c == -1 && d == -13026753) {
+            Log.d(TAG, "找到加号");
+            return true;
+        } else {
+            Log.d(TAG, "没找到加号");
+            return false;
+
+        }
+    }
+
+
+    //点击微信右上角的加号按钮
+    public static boolean clickAdd10805(String screenname) {
+        new RootShellCmd().simulateClick(978, 132);//找到+号，点击
+        Log.d(TAG, "点击了加号");
         SystemClock.sleep(2000);
-        //new RootShellCmd().simulateClick(500, 130);//点击桌面的微信APP
-
-        if (findAddImg1080(screenname)) {
-            if (clickAdd1080(screenname)) {
-                if (clickAddFriend1080(screenname)) {
-                    if (clickLvSeFangDaJing1080(screenname)) {
-                        if (findSearchButtn1080(screenname, wxnum)) {
-                            if (clickSearch1080(screenname)) { //账号为数字，跳详细资料页面。账号为字母+数字跳搜索页面，要再点一层才到详细资料页面。
-                                if (clickThreePoint1080(screenname)) {
-                                    if (clickRemarkButton1080(screenname)) {
-                                        if (deleteBeforeAndMark1080(remark)) {
-                                            clickFinishButton1080();//这里的逻辑没处理
-                                            exit();
-                                            return true;
-                                        }
-                                        return false;
-                                    }
-                                    return false;
-                                }
-                                return false;
-                            }
-                            return false;
-                        }
-                        return false;
-                    }
-                    return false;
-                }
-                return false;
-            }
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        int a = new RootShellCmd().getColors(542, 417, screenname);
+        int b = new RootShellCmd().getColors(564, 417, screenname);
+        int c = new RootShellCmd().getColors(553, 406, screenname);
+        int d = new RootShellCmd().getColors(547, 411, screenname); //r=57  g=58   b=63
+        if (a == -1 && b == -1 && c == -1 && d == -13026753) {
+            Log.d(TAG, "找到了添加朋友按钮");
+            return true;
+        } else {
+            Log.d(TAG, "没找到添加朋友按钮");
             return false;
         }
+    }
+
+    //点击加号弹出的List的“添加朋友”按钮
+    public static boolean clickAddFriend10805(String screenname) {
+        new RootShellCmd().simulateClick(700, 420);//
+        Log.d(TAG, "点击了添加朋友按钮");
+        SystemClock.sleep(2000);
+        new RootShellCmd().getScreen(screenname);  //点了添加朋友截图（绿色放大镜界面）
+        SystemClock.sleep(2000);
+        int a = new RootShellCmd().getColors(70, 325, screenname);    //63 184 56 绿
+        int b = new RootShellCmd().getColors(122, 371, screenname);   //绿
+        int c = new RootShellCmd().getColors(106, 355, screenname);   //绿
+        int d = new RootShellCmd().getColors(87, 340, screenname);    //白
+        if (a == -12601288 && b == -12601288 && c == -12601288 && d == -1) {
+            Log.d(TAG, "找到了绿色放大镜");
+            return true;
+        } else {
+            Log.d(TAG, "没找到绿色放大镜");
+            return false;
+        }
+    }
+
+
+    //点击绿色放大镜区域的EditeText
+    public static boolean clickGreenMagnifier10805(String screenname) {
+        new RootShellCmd().simulateClick(356, 356);             // 添加朋友界面，点击放大镜
+        Log.d(TAG, "点击了绿色放大镜");
+        SystemClock.sleep(2000);
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        //白色放大镜
+        int a = new RootShellCmd().getColors(204, 110, screenname);   //白
+        int b = new RootShellCmd().getColors(245, 153, screenname); //白
+        int c = new RootShellCmd().getColors(232, 139, screenname);  //白
+        int d = new RootShellCmd().getColors(216, 123, screenname);  //黑
+        if (a == -1 && b == -1 && c == -1 && d == -13026753) {
+            Log.d(TAG, "找到了输入微信账号EditText");
+            return true;
+
+        } else {
+            Log.d(TAG, "没找到EditText");
+            return false;
+        }
+    }
+
+
+    //找到输入微信账号后出现的搜索按钮
+    public static boolean findSearchButtn10805(String weixinaccount, String screenname) {
+        new RootShellCmd().setText(weixinaccount);
+        Log.d(TAG, "输入了微信账号");
+        SystemClock.sleep(2000);
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        //搜索微信账号，绿框包白色放大镜
+        int a = new RootShellCmd().getColors(84, 277, screenname);   //白
+        int b = new RootShellCmd().getColors(137, 325, screenname);  //白
+        int c = new RootShellCmd().getColors(122, 310, screenname);   //白
+        int d = new RootShellCmd().getColors(102, 294, screenname);   //深绿43 162 69
+
+        if (a == -1 && b == -1 && c == -1 && d == -13917627) {
+            Log.d(TAG, "找到搜索微按钮");
+            return true;
+        } else {
+            Log.d(TAG, "没找到搜索微按钮");
+            return false;
+        }
+    }
+
+    //输入账号后点击搜索联系人按钮
+    public static boolean clickSearch10805(String screenname) {
+        new RootShellCmd().simulateClick(450, 300);//搜索微信账号按钮
+        Log.d(TAG, "点击了搜索微信按钮");
+        SystemClock.sleep(5000);//等待搜索
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        int a = new RootShellCmd().getColors(115, 1218, screenname);     //绿
+        int b = new RootShellCmd().getColors(115, 1060, screenname);    //绿
+        int c = new RootShellCmd().getColors(988, 1218, screenname);    //绿
+        int d = new RootShellCmd().getColors(988, 1060, screenname);    //绿
+       if (a == -15028967 && b == -15028967 && c == -15028967 && d == -15028967) {
+            Log.d(TAG, "找到了添加好友的按钮");
+           return true;
+       }
+        Log.d(TAG, "没找添加好友的按钮,用户不存在或者搜索超时");
+        return false;
+    }
+
+    //点击添加到通讯录按钮
+    public static boolean clickAddFrinedFinish10805(String screenname) {
+        new RootShellCmd().simulateClick(450, 300);//搜索微信账号按钮
+        Log.d(TAG, "点击了搜索微信按钮");
+        SystemClock.sleep(5000);//等待搜索
+        new RootShellCmd().getScreen(screenname);
+        SystemClock.sleep(2000);
+        int a = new RootShellCmd().getColors(1008, 109, screenname);    //白
+        int b = new RootShellCmd().getColors(1008, 132, screenname);    //白
+        int c = new RootShellCmd().getColors(1007, 154, screenname);    //白
+        int d = new RootShellCmd().getColors(1008, 144, screenname);    //黑
+        if (a == -1 && b == -1 && c == -1 && d == -13026753) {
+            Log.d(TAG, "添加好友完成");
+            return true;
+        }
+        Log.d(TAG, "没点到添加到通讯录按钮");
         return false;
 
     }
 
+
+    //==============================================1280*720==5.0寸=================================
     //找到微信的+号图标
     private static boolean findAddImg(String screenname) {
         SystemClock.sleep(3000);//等待微信APP启动
@@ -277,16 +376,17 @@ public class ScriptSet {
 
     }
 
-    //====================================================1920*1080分辨率===============================================================================
+
+    //============================================1920*1080分辨率==5.7寸=============================
     //找到微信的+号图标
     public static boolean findAddImg1080(String screenname) {
         SystemClock.sleep(3000);//等待微信APP启动
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(1000);
-        int a = new RootShellCmd().getColors(964,121, screenname);
-        int b = new RootShellCmd().getColors(986,98, screenname);
-        int c = new RootShellCmd().getColors(1006,121, screenname);
-        int d = new RootShellCmd().getColors(975,108, screenname);
+        int a = new RootShellCmd().getColors(964, 121, screenname);
+        int b = new RootShellCmd().getColors(986, 98, screenname);
+        int c = new RootShellCmd().getColors(1006, 121, screenname);
+        int d = new RootShellCmd().getColors(975, 108, screenname);
         if (a == -1 && b == -1 && c == -1 && d == -13026753) {
             Log.d(TAG, "找到加号");
             return true;
@@ -299,15 +399,15 @@ public class ScriptSet {
 
     //点击微信右上角的加号按钮
     public static boolean clickAdd1080(String screenname) {
-        new RootShellCmd().simulateClick(1006,121);//找到+号，点击
+        new RootShellCmd().simulateClick(1006, 121);//找到+号，点击
         Log.d(TAG, "点击了加号");
         SystemClock.sleep(2000);
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
-        int a = new RootShellCmd().getColors(587,382, screenname);
-        int b = new RootShellCmd().getColors(597,372, screenname);
-        int c = new RootShellCmd().getColors(607,382, screenname);
-        int d = new RootShellCmd().getColors(589,374, screenname);
+        int a = new RootShellCmd().getColors(587, 382, screenname);
+        int b = new RootShellCmd().getColors(597, 372, screenname);
+        int c = new RootShellCmd().getColors(607, 382, screenname);
+        int d = new RootShellCmd().getColors(589, 374, screenname);
         if (a == -1 && b == -1 && c == -1 && d == -13026753) {
             Log.d(TAG, "找到了添加朋友按钮");
             return true;
@@ -319,14 +419,14 @@ public class ScriptSet {
 
     //点击加号弹出的List的“添加朋友”按钮
     public static boolean clickAddFriend1080(String screenname) {
-        new RootShellCmd().simulateClick(607,382);
+        new RootShellCmd().simulateClick(607, 382);
         Log.d(TAG, "点击了添加朋友按钮");
         SystemClock.sleep(2000);
         new RootShellCmd().getScreen(screenname);  //点了添加朋友截图（绿色放大镜界面）
         SystemClock.sleep(2000);
-        int a = new RootShellCmd().getColors(62,304, screenname);   //63 184 56 绿
-        int b = new RootShellCmd().getColors(112,340, screenname);   //绿
-        int c = new RootShellCmd().getColors(98,325, screenname);   //绿
+        int a = new RootShellCmd().getColors(62, 304, screenname);   //63 184 56 绿
+        int b = new RootShellCmd().getColors(112, 340, screenname);   //绿
+        int c = new RootShellCmd().getColors(98, 325, screenname);   //绿
         if (a == -12601288 && b == -12601288 && c == -12601288) {
             Log.d(TAG, "找到了绿色放大镜");
             return true;
@@ -344,9 +444,9 @@ public class ScriptSet {
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
         //白色放大镜
-        int a = new RootShellCmd().getColors(185,103, screenname);   //白
-        int b = new RootShellCmd().getColors(224,139, screenname);//白
-        int c = new RootShellCmd().getColors(199,115, screenname);//黑
+        int a = new RootShellCmd().getColors(185, 103, screenname);   //白
+        int b = new RootShellCmd().getColors(224, 139, screenname);//白
+        int c = new RootShellCmd().getColors(199, 115, screenname);//黑
         if (a == -1 && b == -1 && c == -13026753) {
             Log.d(TAG, "找到了输入微信账号EditText");
             return true;
@@ -365,9 +465,9 @@ public class ScriptSet {
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
         //搜索微信账号，绿框包白色放大镜
-        int a = new RootShellCmd().getColors(43,215, screenname);   //深绿  43 162 69
-        int b = new RootShellCmd().getColors(159,330, screenname);//深绿
-        int c = new RootShellCmd().getColors(112,284, screenname);//白
+        int a = new RootShellCmd().getColors(43, 215, screenname);   //深绿  43 162 69
+        int b = new RootShellCmd().getColors(159, 330, screenname);//深绿
+        int c = new RootShellCmd().getColors(112, 284, screenname);//白
         if (a == -13917627 && b == -13917627 && c == -1) {
             Log.d(TAG, "找到搜索微按钮");
             return true;
@@ -384,9 +484,9 @@ public class ScriptSet {
         SystemClock.sleep(5000);//等待搜索
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
-        int a = new RootShellCmd().getColors(1014,112, screenname);   //黑
-        int b = new RootShellCmd().getColors(1014,121, screenname);//白
-        int c = new RootShellCmd().getColors(1014,132, screenname);//黑
+        int a = new RootShellCmd().getColors(1014, 112, screenname);   //黑
+        int b = new RootShellCmd().getColors(1014, 121, screenname);//白
+        int c = new RootShellCmd().getColors(1014, 132, screenname);//黑
         if (a == -13026753 && b == -1 && c == -13026753) {
             Log.d(TAG, "找到了右上角的三点按钮");
             return true;
@@ -397,14 +497,14 @@ public class ScriptSet {
 
     //点击微信右上角的三个小点按钮
     public static boolean clickThreePoint1080(String screenname) {
-        new RootShellCmd().simulateClick(1006,121);
+        new RootShellCmd().simulateClick(1006, 121);
         Log.d(TAG, "点击了三点按钮");
         SystemClock.sleep(2000);
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
-        int a = new RootShellCmd().getColors(595,229, screenname);   //白
-        int b = new RootShellCmd().getColors(556,268, screenname);//白
-        int c = new RootShellCmd().getColors(565,271, screenname);//黑
+        int a = new RootShellCmd().getColors(595, 229, screenname);   //白
+        int b = new RootShellCmd().getColors(556, 268, screenname);//白
+        int c = new RootShellCmd().getColors(565, 271, screenname);//黑
         if (a == -1 && b == -1 && c == -13026753) {
             Log.d(TAG, "找到了修改备注按钮");
             return true;
@@ -419,9 +519,9 @@ public class ScriptSet {
         SystemClock.sleep(2000);
         new RootShellCmd().getScreen(screenname);
         SystemClock.sleep(2000);
-        int a = new RootShellCmd().getColors(181,103, screenname);   //白
-        int b = new RootShellCmd().getColors(207,141, screenname);//白
-        int c = new RootShellCmd().getColors(192,107, screenname);//黑
+        int a = new RootShellCmd().getColors(181, 103, screenname);   //白
+        int b = new RootShellCmd().getColors(207, 141, screenname);//白
+        int c = new RootShellCmd().getColors(192, 107, screenname);//黑
         if (a == -1 && b == -1 && c == -13026753) {
             Log.d(TAG, "找到了修改备注界面");
             return true;
@@ -444,12 +544,87 @@ public class ScriptSet {
 
     //点击微信右上角的完成按钮
     public static boolean clickFinishButton1080() {
-        new RootShellCmd().simulateClick(1006,121);
+        new RootShellCmd().simulateClick(1006, 121);
         Log.d(TAG, "修改备注已保存");
         SystemClock.sleep(2000);
         return true;
     }
+
+
 }
+
+
+
+    /*
+    //1280*720 5寸
+    SystemClock.sleep(2000);
+        new RootShellCmd().simulateClick(500, 130);//点击桌面的微信APP
+        if (findAddImg(screenname)) {
+            if (clickAdd(screenname)) {
+                if (clickAddFriend(screenname)) {
+                    if (clickLvSeFangDaJing(screenname)) {
+                        if (findSearchButtn(screenname, wxnum)) {
+                            if (clickSearch(screenname)) { //账号为数字，跳详细资料页面。账号为字母+数字跳搜索页面，要再点一层才到详细资料页面。
+                                if (clickThreePoint(screenname)) {
+                                    if (clickRemarkButton(screenname)) {
+                                        if (deleteBeforeAndMark(remark)) {
+                                            clickFinishButton();//这里的逻辑没处理
+                                            exit();
+                                            return true;
+                                        }
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                                return false;
+                            }
+                            return false;
+                        }
+                        return false;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;*/
+
+
+//1920*1080 5.7寸
+// SystemClock.sleep(2000);
+//new RootShellCmd().simulateClick(500, 130);//点击桌面的微信APP
+
+        /*if (findAddImg1080(screenname)) {
+            if (clickAdd1080(screenname)) {
+                if (clickAddFriend1080(screenname)) {
+                    if (clickLvSeFangDaJing1080(screenname)) {
+                        if (findSearchButtn1080(screenname, wxnum)) {
+                            if (clickSearch1080(screenname)) { //账号为数字，跳详细资料页面。账号为字母+数字跳搜索页面，要再点一层才到详细资料页面。
+                                if (clickThreePoint1080(screenname)) {
+                                    if (clickRemarkButton1080(screenname)) {
+                                        if (deleteBeforeAndMark1080(remark)) {
+                                            clickFinishButton1080();//这里的逻辑没处理
+                                            exit();
+                                            return true;
+                                        }
+                                        return false;
+                                    }
+                                    return false;
+                                }
+                                return false;
+                            }
+                            return false;
+                        }
+                        return false;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;*/
 
 // RootShellCmd cmd = new RootShellCmd();
 

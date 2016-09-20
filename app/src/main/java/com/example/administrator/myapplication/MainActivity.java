@@ -43,13 +43,14 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
        /* String weixinnum = mEditText1.getText().toString().trim();
         String remarkname = mEditText2.getText().toString().trim();*/
+
         // if (!weixinnum.isEmpty() && !remarkname.isEmpty()) {
        // runScript("13632316531", "119");
         //  } else {
         //      Toast.makeText(this, "账号或备注名为空", Toast.LENGTH_SHORT).show();
         // }
 
-        ScriptSet.WXAddFriendScript("13632316531","king","9518");
+        ScriptSet.addWeiXinFriendScript("13632316531","9518");
 
     }
 
