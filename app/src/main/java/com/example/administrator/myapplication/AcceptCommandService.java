@@ -116,6 +116,7 @@ public class AcceptCommandService extends IntentService {
         new RootShellCmd().simulateKey(4);
         SystemClock.sleep(1000);
         new RootShellCmd().simulateKey(4);
+        new RootShellCmd().simulateKey(4);
     }
 
 }

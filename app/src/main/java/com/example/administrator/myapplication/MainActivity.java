@@ -67,8 +67,9 @@ public class MainActivity extends AppCompatActivity {
      * @param weixinnum 要添加的微信账号
      */
     private void runAddFriendScript(String weixinnum) {
-        boolean isFinish = ScriptSet.addWeiXinFriendScript(weixinnum, "9517");//备注名只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
-        if (isFinish) {
+        //只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
+        boolean isFinish = ScriptSet.addWeiXinFriendScript(weixinnum, "9517");
+            if (isFinish) {
             Log.d("ScriptSet", "执行成功");
         }
         if (!isFinish) {
