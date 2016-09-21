@@ -1,1 +1,0 @@
-{ "weixinaccount": ["abcd12345","abcd123456","abcd1234567"]}
