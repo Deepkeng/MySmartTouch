@@ -8,37 +8,31 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText mEditText1;
     private EditText mEditText2;
+    private ArrayList<String> mAccountTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
-            String account = FileUtil.readFromAssets(this, "account.txt");
-            JSONObject accountJson = new JSONObject(account);
-            JSONArray jsonArray = accountJson.getJSONArray("weixinaccount");
-            for(int i=0;i<jsonArray.length();i++){
-                Log.d("Main",jsonArray.get(i).toString());
-            }
 
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         init();
     }
 
     private void init() {
         //启动服务
         startService(new Intent(getApplicationContext(), AcceptCommandService.class));
+
+        //读取TXT文件
+        mAccountTxt = FileUtil.getTxt("sdcard/backups/account.txt");
+
+
        /* mEditText1 = (EditText) findViewById(R.id.et_1);
         mEditText2 = (EditText) findViewById(R.id.et_2);*/
         /*try {
@@ -58,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        if(mAccountTxt!=null){
+            //遍历账号数组
+            for (int i=0;i<mAccountTxt.size();i++){
+                runAddFriendScript(mAccountTxt.get(i));
+            }
+        }
+
+
+
        /* String weixinnum = mEditText1.getText().toString().trim();
         String remarkname = mEditText2.getText().toString().trim();*/
 
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         //  } else {
         //      Toast.makeText(this, "账号或备注名为空", Toast.LENGTH_SHORT).show();
         // }
-        runAddFriendScript("abcd1234");
+
 
     }
 

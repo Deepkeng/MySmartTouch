@@ -17,6 +17,38 @@ import java.util.ArrayList;
 public class FileUtil {
 	private final static String DEFAULT_DIR = "/data/data";
 
+
+	/**
+	 * 读取本地普通文件，将其转化为一个字符串数组
+	 * @return
+	 */
+	public static ArrayList<String> getTxt(String filepath){
+		try{
+			String temp = null;
+			File f = new File(filepath);
+			String adn="";
+			//指定读取编码用于读取中文
+			InputStreamReader read = new InputStreamReader(new FileInputStream(f),"UTF-8");
+			ArrayList<String> readList = new ArrayList<String>();
+
+			BufferedReader reader=new BufferedReader(read);
+			//bufReader = new BufferedReader(new FileReader(filepath));
+			while((temp=reader.readLine())!=null &&!"".equals(temp)){
+				readList.add(temp);
+			}
+			read.close();
+			return readList;
+		}catch (Exception e) {
+			// TODO: handle exception
+			Log.e("FileUtil","读取文件--->失败！- 原因：文件路径错误或者文件不存在");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
+
+
 	/**
 	 *   获取SD卡
 	 */
