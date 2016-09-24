@@ -32,10 +32,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        //初始化数据
+
 
 
         //读取TXT文件
-       // mAccountTxt = FileUtil.getTxt("sdcard/backups/account.txt");
+        // mAccountTxt = FileUtil.getTxt("sdcard/backups/account.txt");
 
 
        /* mEditText1 = (EditText) findViewById(R.id.et_1);
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }*/
     }
+
+
 
 
     @Override
@@ -120,8 +124,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean reRun(String weixinnum) {
         return ScriptSet.addWeiXinFriendScript(weixinnum, "9517");
     }
-
-
 
 
 }

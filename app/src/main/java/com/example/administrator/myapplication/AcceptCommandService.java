@@ -5,10 +5,19 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.example.administrator.myapplication.utils.HttpUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by psq on 2016/9/12
  */
 public class AcceptCommandService extends IntentService {
+    private final static String HTTP = "http://";
+    private final static String HOST = "192.168.1.30/";
+    private final static String BASE_URL = HTTP + HOST;
+
     public AcceptCommandService() {
         super("");
     }
@@ -25,10 +34,28 @@ public class AcceptCommandService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
+        //请求数据前，先登录admin admin,使用post请求
+       // String loginBack = ServerAPI.login("admin", "admin");
 
+        String loginBack = login("admin", "admin");
+        Log.d("MainActivity","loginBack"+loginBack);
 
 
     }
+
+    public static String login(String account, String password) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("account", account);
+            jsonObject.put("password", password);
+            jsonObject.put("timespan", (System.currentTimeMillis() / 1000) + "");
+            jsonObject.put("device", MyApplication.getIMEI());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return HttpUtils.doPost(BASE_URL + "login", jsonObject);
+    }
+
 
       /*   // 创建接收端的Socket对象
         DatagramSocket ds = null;
