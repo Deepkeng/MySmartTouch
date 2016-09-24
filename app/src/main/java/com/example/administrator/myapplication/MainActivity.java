@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         //初始化数据
 
 
-
         //读取TXT文件
         // mAccountTxt = FileUtil.getTxt("sdcard/backups/account.txt");
 

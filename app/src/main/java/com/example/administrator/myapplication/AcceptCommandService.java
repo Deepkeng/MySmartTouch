@@ -43,13 +43,13 @@ public class AcceptCommandService extends IntentService {
 
     }
 
-    public static String login(String account, String password) {
+    public  String login(String account, String password) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("account", account);
             jsonObject.put("password", password);
             jsonObject.put("timespan", (System.currentTimeMillis() / 1000) + "");
-            jsonObject.put("device", MyApplication.getIMEI());
+           // jsonObject.put("device", InitUtil.getIMEI());
         } catch (JSONException e) {
             e.printStackTrace();
         }
