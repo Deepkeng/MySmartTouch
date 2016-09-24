@@ -5,11 +5,6 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.util.Log;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
-
 /**
  * Created by psq on 2016/9/12
  */
@@ -31,7 +26,10 @@ public class AcceptCommandService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
 
-        // 创建接收端的Socket对象
+
+    }
+
+      /*   // 创建接收端的Socket对象
         DatagramSocket ds = null;
         try {
             ds = new DatagramSocket(12345);//端口号：12345
@@ -69,8 +67,9 @@ public class AcceptCommandService extends IntentService {
 
         // 释放资源
         // 接收端应该一直开着等待接收数据，是不需要关闭
-        // ds.close();
-    }
+        // ds.close();*/
+
+
 
     /**
      * 执行脚本
