@@ -34,13 +34,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-            mIMEI = ((TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-
-
-
-        //初始化数据
+        mIMEI = ((TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
         //启动服务
-        startService(new Intent(this, AcceptCommandService.class));
+        Intent intent = new Intent(this, AcceptCommandService.class);
+        //intent.putExtra("手机IMEI",mIMEI);
+        startService(intent);
 
         //读取TXT文件
         // mAccountTxt = FileUtil.getTxt("sdcard/backups/account.txt");

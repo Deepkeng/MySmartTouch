@@ -20,7 +20,7 @@ public class AcceptCommandService extends IntentService {
     private final static String HTTP = "http://";
     private final static String HOST = "192.168.1.30/";
     private final static String BASE_URL = HTTP + HOST;
-    private final static String CONTACT = BASE_URL+"contacts";
+    private final static String CONTACT = BASE_URL + "contacts";
 
 
     public AcceptCommandService() {
@@ -38,6 +38,10 @@ public class AcceptCommandService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+    /*    Bundle extras = intent.getExtras();
+        String IMEI = extras.getString("手机IMEI");
+        Log.d("MainActivity","Activity传过来的："+IMEI);*/
+
         int errcode;
         SharedPreferences mSharedPreferences;
         //请求数据前，先登录admin admin,使用post请求
@@ -55,20 +59,21 @@ public class AcceptCommandService extends IntentService {
 
             //把token转成JSONObject,当请求参数
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("token",token);
+            jsonObject.put("token", token);
 
             //把token存到sp
             mSharedPreferences = getSharedPreferences(getPackageName(), Context.MODE_APPEND);
             SharedPreferences.Editor edit = mSharedPreferences.edit();
             edit.putString("token", token);
-            edit.commit();
+            //edit.commit();
+            edit.apply();
 
 
             Log.d("AcceptCommandService", " token:" + token);
             if (errcode == 0) {
                 //向192.168.1.30/contacts请求联系人数据
-                String getContactJson = HttpUtils.doPost(CONTACT,jsonObject);
-                Log.d("AcceptCommandService",getContactJson);
+                String getContactJson = HttpUtils.doPost(CONTACT, jsonObject);
+                Log.d("AcceptCommandService", getContactJson);
 
                 //解析返回的json
                 JSONObject json = new JSONObject(getContactJson);
@@ -78,12 +83,9 @@ public class AcceptCommandService extends IntentService {
                 JSONObject json1 = new JSONObject(data1);
                 String account = json1.getString("account");
 
-                if(errcode1 ==0){
-                    runAddFriendScript(account);
+                if (errcode1 == 0) {
+                    runAddFriendScript(account);//获取到联系人立即跑脚本
                 }
-
-
-
 
             }
 
