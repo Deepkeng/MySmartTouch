@@ -1,4 +1,4 @@
-package com.example.administrator.myapplication;
+package com.example.administrator.myapplication.utils;
 
 import android.content.Context;
 import android.os.Environment;
@@ -25,6 +25,7 @@ public class FileUtil {
 	 * @return
 	 */
 	public static ArrayList<String> getTxt(String filepath){
+		Log.d("MainActivity","读取配置文件");
 		try{
 			String temp = null;
 			File f = new File(filepath);

@@ -27,6 +27,7 @@ public class AcceptCommandService extends IntentService {
 
 
 
+
     }
 
       /*   // 创建接收端的Socket对象

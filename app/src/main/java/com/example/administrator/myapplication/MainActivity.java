@@ -23,12 +23,19 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
-    private void init() {
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         //启动服务
-        startService(new Intent(getApplicationContext(), AcceptCommandService.class));
+        startService(new Intent(this, AcceptCommandService.class));
+    }
+
+    private void init() {
+
 
         //读取TXT文件
-        mAccountTxt = FileUtil.getTxt("sdcard/backups/account.txt");
+       // mAccountTxt = FileUtil.getTxt("sdcard/backups/account.txt");
 
 
        /* mEditText1 = (EditText) findViewById(R.id.et_1);
@@ -51,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        if(mAccountTxt!=null){
+       /* if(mAccountTxt!=null){
             //遍历账号数组
             for (int i=0;i<mAccountTxt.size();i++){
                 runAddFriendScript(mAccountTxt.get(i));
             }
-        }
+        }*/
 
 
 
