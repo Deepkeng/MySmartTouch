@@ -1,8 +1,11 @@
 package com.example.administrator.myapplication;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.SystemClock;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.example.administrator.myapplication.utils.HttpUtils;
@@ -17,6 +20,8 @@ public class AcceptCommandService extends IntentService {
     private final static String HTTP = "http://";
     private final static String HOST = "192.168.1.30/";
     private final static String BASE_URL = HTTP + HOST;
+    private final static String CONTACT = BASE_URL+"contacts";
+
 
     public AcceptCommandService() {
         super("");
@@ -33,23 +38,72 @@ public class AcceptCommandService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
+        int errcode;
+        SharedPreferences mSharedPreferences;
         //请求数据前，先登录admin admin,使用post请求
-       // String loginBack = ServerAPI.login("admin", "admin");
-
         String loginBack = login("admin", "admin");
-        Log.d("MainActivity","loginBack"+loginBack);
+        Log.d("AcceptCommandService", "loginBack" + loginBack);
+        try {
+            //登录成功后解析返回的json
+            JSONObject loginBackJson = new JSONObject(loginBack);
+            errcode = loginBackJson.getInt("errcode");
+
+            //data里又是一个json对象，所以继续解析
+            String data = loginBackJson.getString("data");
+            JSONObject tokenJson = new JSONObject(data);
+            String token = tokenJson.getString("token");
+
+            //把token转成JSONObject,当请求参数
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("token",token);
+
+            //把token存到sp
+            mSharedPreferences = getSharedPreferences(getPackageName(), Context.MODE_APPEND);
+            SharedPreferences.Editor edit = mSharedPreferences.edit();
+            edit.putString("token", token);
+            edit.commit();
+
+
+            Log.d("AcceptCommandService", " token:" + token);
+            if (errcode == 0) {
+                //向192.168.1.30/contacts请求联系人数据
+                String getContactJson = HttpUtils.doPost(CONTACT,jsonObject);
+                Log.d("AcceptCommandService",getContactJson);
+
+                //解析返回的json
+                JSONObject json = new JSONObject(getContactJson);
+                int errcode1 = json.getInt("errcode");
+                String data1 = json.getString("data");
+
+                JSONObject json1 = new JSONObject(data1);
+                String account = json1.getString("account");
+
+                if(errcode1 ==0){
+                    runAddFriendScript(account);
+                }
+
+
+
+
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
     }
 
-    public  String login(String account, String password) {
+    public String login(String account, String password) {
+        String mIMEI = ((TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+        Log.d("AcceptCommandService", "IMEI:" + mIMEI);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("account", account);
             jsonObject.put("password", password);
             jsonObject.put("timespan", (System.currentTimeMillis() / 1000) + "");
-           // jsonObject.put("device", InitUtil.getIMEI());
+            jsonObject.put("device", mIMEI);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -98,7 +152,6 @@ public class AcceptCommandService extends IntentService {
         // ds.close();*/
 
 
-
     /**
      * 执行脚本
      *
@@ -144,6 +197,42 @@ public class AcceptCommandService extends IntentService {
         SystemClock.sleep(1000);
         new RootShellCmd().simulateKey(4);
         new RootShellCmd().simulateKey(4);
+    }
+
+    /**
+     * 执行脚本
+     *
+     * @param weixinnum 要添加的微信账号
+     */
+    private void runAddFriendScript(String weixinnum) {
+        //只能ASCII码，要输入汉字https://github.com/senzhk/ADBKeyBoard
+        boolean isFinish = ScriptSet.addWeiXinFriendScript(weixinnum, "9517");
+        if (isFinish) {
+            Log.d("ScriptSet", "执行成功");
+        }
+        if (!isFinish) {
+            Log.d("ScriptSet", "修改失败，执行第2遍");
+            boolean a = reRun(weixinnum);
+            if (!a) {
+                Log.d("ScriptSet", "修改失败，执行第3遍");
+                boolean b = reRun(weixinnum);
+                if (!b) {
+                    Log.d("ScriptSet", "执行失败，执行结束");
+                    /*Log.d("ScriptSet", "修改失败，执行第4遍");
+                    boolean c = reRun(weixinnum);
+                    if (c) {
+                        Log.d("ScriptSet", "执行成功");
+                    } else {
+                        Log.d("ScriptSet", "执行失败，执行结束");
+                    }*/
+                }
+            }
+        }
+    }
+
+    //重新执行脚本
+    private boolean reRun(String weixinnum) {
+        return ScriptSet.addWeiXinFriendScript(weixinnum, "9517");
     }
 
 }

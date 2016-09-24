@@ -1,8 +1,10 @@
 package com.example.administrator.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEditText1;
     private EditText mEditText2;
     private ArrayList<String> mAccountTxt;
+    private String mIMEI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +30,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //启动服务
-        startService(new Intent(this, AcceptCommandService.class));
+
     }
 
     private void init() {
-        //初始化数据
+            mIMEI = ((TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
 
+
+
+        //初始化数据
+        //启动服务
+        startService(new Intent(this, AcceptCommandService.class));
 
         //读取TXT文件
         // mAccountTxt = FileUtil.getTxt("sdcard/backups/account.txt");
